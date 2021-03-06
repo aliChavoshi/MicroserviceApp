@@ -12,7 +12,7 @@ using EventBusRabbitMQ.Producer;
 namespace Basket.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/[Controller]/[Action]")]
+    [Route("api/v1/[Controller]/[action]")]
     public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;
