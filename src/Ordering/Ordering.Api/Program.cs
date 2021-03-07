@@ -15,12 +15,12 @@ namespace Ordering.Api
     {
         public static async Task Main(string[] args)
         {
+            //Build Run Startup ConfigureServices
             var host = CreateHostBuilder(args).Build();
 
             await CreateAndSeedDatabase(host);
+            //Run Async, Run Startup Configure
             await host.RunAsync();
-
-            //CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
