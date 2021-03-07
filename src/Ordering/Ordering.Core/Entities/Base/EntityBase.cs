@@ -7,7 +7,7 @@ namespace Ordering.Core.Entities.Base
         public virtual T Id { get; protected set; }
         private int? _requestedHashCode;
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (obj == null || !(obj is EntityBase<T>))
                 return false;
@@ -43,7 +43,7 @@ namespace Ordering.Core.Entities.Base
         public static bool operator ==(EntityBase<T> left, EntityBase<T> right)
         {
             if (Equals(left, null))
-                return Equals(right, null) ? true : false;
+                return right == null;
             else
                 return !(left == right);
         }

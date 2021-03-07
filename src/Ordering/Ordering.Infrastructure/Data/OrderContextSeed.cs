@@ -45,7 +45,15 @@ namespace Ordering.Infrastructure.Data
                     FirstName = "Ali",
                     LastName = "Chavoshi",
                     EmailAddress = "Alichavoshii1372@gamil.com",
-                    Country = "Iran"
+                    Country = "Iran",
+                    CVV = "adf",
+                    CardName = "asef",
+                    CardNumber = "saef",
+                    Expiration = "sadf",
+                    PaymentMethod = 6,
+                    State = "sefjn",
+                    TotalPrice = 541,
+                    ZipCode = "sdf"
                 }
             };
         }
