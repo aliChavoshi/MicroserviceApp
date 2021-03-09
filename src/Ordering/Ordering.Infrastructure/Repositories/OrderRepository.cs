@@ -15,7 +15,7 @@ namespace Ordering.Infrastructure.Repositories
         {
         }
 
-        public async Task<IEnumerable<Order>> GetOrderByUserName(string username)
+        public async Task<IEnumerable<Order>> GetOrdersByUserName(string username)
         {
             return await Context.Order.Where(x => x.UserName == username).ToListAsync();
         }
