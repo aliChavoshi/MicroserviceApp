@@ -10,7 +10,7 @@ using Ordering.Core.Repositories;
 
 namespace Ordering.Application.Handlers
 {
-    public class CheckoutOrderHandler : IRequestHandler<CheckoutOrderCommand,OrderResponse>
+    public class CheckoutOrderHandler : IRequestHandler<CheckoutOrderCommand, OrderResponse>
     {
         private readonly IOrderRepository _orderRepository;
 
@@ -22,8 +22,7 @@ namespace Ordering.Application.Handlers
             CancellationToken cancellationToken)
         {
             var orderEntity = OrderMapper.Mapper.Map<Order>(request);
-            if (orderEntity==null)
-                throw new ApplicationException("Not Mapped");
+            
             var newOrder = await _orderRepository.AddAsync(orderEntity);
             var orderResponse = OrderMapper.Mapper.Map<OrderResponse>(newOrder);
             return orderResponse;
