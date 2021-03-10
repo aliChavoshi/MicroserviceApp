@@ -67,7 +67,7 @@ namespace Basket.Api.Controllers
             var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
             eventMessage.TotalPrice = basket.TotalPrice();
 
-            _eventBus.PublishBasketCheckout(EventBusConstants.BasketCheckoutQueue, eventMessage);
+            _eventBus.PublishBasketCheckout(queueName: EventBusConstants.BasketCheckoutQueue,publishModel: eventMessage);
 
             return Accepted();
         }

@@ -1,4 +1,6 @@
 using System.Reflection;
+using EventBusRabbitMQ;
+using EventBusRabbitMQ.Producer;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Ordering.Api.RabbitMQ;
 using Ordering.Application.Handlers;
 using Ordering.Application.Mapper;
 using Ordering.Core.Repositories;
@@ -14,6 +17,7 @@ using Ordering.Core.Repositories.Base;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.Repositories;
 using Ordering.Infrastructure.Repositories.Base;
+using RabbitMQ.Client;
 
 namespace Ordering.Api
 {
@@ -32,13 +36,16 @@ namespace Ordering.Api
 
             services.AddControllers();
 
+            //Connection String
             services.AddDbContextPool<OrderContext>(c =>
                 c.UseSqlServer(Configuration.GetConnectionString("OrderConnection")));
-
+            //Auto Mapper
             services.AddAutoMapper(typeof(OrderMappingProfile));
+            //CQRS
             services.AddMediatR(typeof(CheckoutOrderHandler).GetTypeInfo().Assembly);
+
+            //IOC
             services.AddTransient<IOrderRepository, OrderRepository>();
-            
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
 
@@ -55,6 +62,28 @@ namespace Ordering.Api
                 });
             });
 
+            #endregion
+
+            #region RabbitMQ
+
+            services.AddSingleton<IRabbitMqConnection>(sp =>
+            {
+                var factory = new ConnectionFactory()
+                {
+                    HostName = Configuration["EventBus:HostName"]
+                };
+
+                var username = Configuration["EventBus:UserName"];
+                var password = Configuration["EventBus:Password"];
+
+                if (!string.IsNullOrEmpty(username))
+                    factory.UserName = username;
+                if (!string.IsNullOrEmpty(password))
+                    factory.Password = password;
+
+                return new RabbitMqConnection(factory);
+            });
+            services.AddSingleton<EventBusRabbitMqConsumer>();
             #endregion
         }
 

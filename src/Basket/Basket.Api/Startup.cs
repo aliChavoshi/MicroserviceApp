@@ -37,7 +37,7 @@ namespace Basket.Api
             services.AddControllers();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IBasketContext, BasketContext>();
-            services.AddSingleton<EventBusRabbitMqProducer>();
+            
 
             #region Swagger
 
@@ -75,6 +75,7 @@ namespace Basket.Api
 
             });
 
+            services.AddSingleton<EventBusRabbitMqProducer>();
             #endregion
 
             services.AddAutoMapper(typeof(Mapping.Mapping));
