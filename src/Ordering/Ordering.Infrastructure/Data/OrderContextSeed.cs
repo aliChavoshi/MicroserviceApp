@@ -11,7 +11,7 @@ namespace Ordering.Infrastructure.Data
     {
         public static async Task SeedAsync(OrderContext context, ILoggerFactory loggerFactory, int? retry = 0)
         {
-            var retryForAvailability = retry.Value;
+            var retryForAvailability = retry.GetValueOrDefault(0);
             try
             {
                 await context.Database.MigrateAsync();
@@ -36,9 +36,9 @@ namespace Ordering.Infrastructure.Data
 
         private static IEnumerable<Order> GetPerConfigOrders()
         {
-            return new List<Order>()
+            return new List<Order>
             {
-                new Order()
+                new()
                 {
                     AddressLine = "kashan",
                     UserName = "Ali",

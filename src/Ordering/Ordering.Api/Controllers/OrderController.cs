@@ -36,6 +36,5 @@ namespace Ordering.Api.Controllers
             var result = await _mediator.Send(request: command);
             return Ok(result);
         }
-
     }
 }
