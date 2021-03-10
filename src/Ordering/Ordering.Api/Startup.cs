@@ -41,6 +41,7 @@ namespace Ordering.Api
             //Connection String
             services.AddDbContextPool<OrderContext>(c =>
                 c.UseSqlServer(Configuration.GetConnectionString("OrderConnection")));
+
             //Auto Mapper
             services.AddAutoMapper(typeof(OrderMappingProfile));
             services.AddAutoMapper(typeof(OrderMapping));
@@ -48,9 +49,9 @@ namespace Ordering.Api
             services.AddMediatR(typeof(CheckoutOrderHandler).GetTypeInfo().Assembly);
 
             //IOC
-            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
+            services.AddTransient<IOrderRepository, OrderRepository>();
 
             #region Swagger
 
