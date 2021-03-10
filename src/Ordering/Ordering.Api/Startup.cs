@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Ordering.Api.Mapping;
 using Ordering.Api.RabbitMQ;
 using Ordering.Application.Handlers;
 using Ordering.Application.Mapper;
@@ -41,6 +42,7 @@ namespace Ordering.Api
                 c.UseSqlServer(Configuration.GetConnectionString("OrderConnection")));
             //Auto Mapper
             services.AddAutoMapper(typeof(OrderMappingProfile));
+            services.AddAutoMapper(typeof(OrderMapping));
             //CQRS
             services.AddMediatR(typeof(CheckoutOrderHandler).GetTypeInfo().Assembly);
 
