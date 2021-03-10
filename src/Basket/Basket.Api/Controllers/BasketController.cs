@@ -1,13 +1,12 @@
-﻿using System;
+﻿using AutoMapper;
 using Basket.Api.Entities;
 using Basket.Api.Repositories.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Threading.Tasks;
-using AutoMapper;
 using EventBusRabbitMQ.Common;
 using EventBusRabbitMQ.Event;
 using EventBusRabbitMQ.Producer;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Basket.Api.Controllers
 {
@@ -67,7 +66,7 @@ namespace Basket.Api.Controllers
             var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
             eventMessage.TotalPrice = basket.TotalPrice();
 
-            _eventBus.PublishBasketCheckout(queueName: EventBusConstants.BasketCheckoutQueue,publishModel: eventMessage);
+            _eventBus.PublishBasketCheckout(queueName: EventBusConstants.BasketCheckoutQueue, publishModel: eventMessage);
 
             return Accepted();
         }

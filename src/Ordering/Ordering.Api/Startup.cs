@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Ordering.Api.Extensions;
 using Ordering.Api.Mapping;
 using Ordering.Api.RabbitMQ;
 using Ordering.Application.Handlers;
@@ -107,6 +108,9 @@ namespace Ordering.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //Listener RabbitMQ
+            app.UseRabbitListener();
 
             app.UseEndpoints(endpoints =>
             {
