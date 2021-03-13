@@ -24,7 +24,7 @@ services:
     ports:
         - "1433:1433"
     environment:
-        SA_PASSWORD: "123456"
+        SA_PASSWORD: "123456789Ali"
         ACCEPT_EULA: "Y"
 
   catalog.api:
@@ -60,7 +60,7 @@ services:
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:OrderConnection=Server=orderdb;Database=OrderDb;User Id=sa;Password=123456"
+      - "ConnectionStrings:OrderConnection=Server=orderdb;Database=OrderDb;User Id=sa;Password=123456789Ali;"
       - "EventBus:HostName=rabbitmq"
     depends_on:
       - orderdb

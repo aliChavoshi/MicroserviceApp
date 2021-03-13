@@ -42,16 +42,16 @@ namespace Ordering.Api
             services.AddDbContextPool<OrderContext>(c =>
                 c.UseSqlServer(Configuration.GetConnectionString("OrderConnection")));
 
-            //Auto Mapper
-            services.AddAutoMapper(typeof(OrderMappingProfile));
-            services.AddAutoMapper(typeof(OrderMapping));
-            //CQRS
-            services.AddMediatR(typeof(CheckoutOrderHandler).GetTypeInfo().Assembly);
-
             //IOC
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IOrderRepository), typeof(OrderRepository));
             services.AddTransient<IOrderRepository, OrderRepository>();
+
+            //Auto Mapper
+            services.AddAutoMapper(typeof(Startup));
+
+            //CQRS
+            services.AddMediatR(typeof(CheckoutOrderHandler).GetTypeInfo().Assembly);
 
             #region Swagger
 
@@ -87,7 +87,8 @@ namespace Ordering.Api
 
                 return new RabbitMqConnection(factory);
             });
-            services.AddSingleton<EventBusRabbitMqConsumer>();
+
+            services.AddScoped<EventBusRabbitMqConsumer>();
             #endregion
         }
 

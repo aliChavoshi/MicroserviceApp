@@ -9,6 +9,7 @@ namespace Basket.Api.Entities
             Items = new List<BasketCartItem>();
         }
         public string UserName { get; set; }
+
         public List<BasketCartItem> Items { get; set; }
 
         //calculate total price basket cart

@@ -34,10 +34,12 @@ namespace Basket.Api
 
                 return ConnectionMultiplexer.Connect(configuration);
             });
+
             services.AddControllers();
+            //Add Services
             services.AddScoped<IBasketRepository, BasketRepository>();
+            //Add Context
             services.AddScoped<IBasketContext, BasketContext>();
-            
 
             #region Swagger
 

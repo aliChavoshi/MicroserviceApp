@@ -1,19 +1,13 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Catalog.Api.Data.Interfaces;
 using Catalog.Api.Data.Services;
 using Catalog.Api.Repositories.Interfaces;
 using Catalog.Api.Repositories.Services;
 using Catalog.Api.Settings;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
@@ -32,10 +26,9 @@ namespace Catalog.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            //Connection String Catalog Db
             services.Configure<CatalogDatabaseSettings>(
                 Configuration.GetSection(nameof(CatalogDatabaseSettings)));
-
             services.AddSingleton<ICatalogDatabaseSettings>(
                 sp => sp.GetRequiredService<IOptions<CatalogDatabaseSettings>>().Value);
 

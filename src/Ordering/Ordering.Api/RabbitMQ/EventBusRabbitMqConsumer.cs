@@ -6,6 +6,7 @@ using MediatR;
 using Newtonsoft.Json;
 using Ordering.Application.Commands;
 using Ordering.Core.Repositories;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +39,7 @@ namespace Ordering.Api.RabbitMQ
             consumer.Received += ReceivedEvent;
 
             channel.BasicConsume(queue: EventBusConstants.BasketCheckoutQueue,
-                autoAck: true, noLocal: false, exclusive: false, arguments: null,
-                consumer: consumer, consumerTag: "");
+                autoAck: true, consumer: consumer, noLocal: false, exclusive: false, arguments: null);
         }
 
         private async Task ReceivedEvent(object sender, BasicDeliverEventArgs args)
