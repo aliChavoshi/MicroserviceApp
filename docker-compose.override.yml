@@ -39,6 +39,7 @@ services:
       - ${HOME}/.aspnet/https:/root/.aspnet/https/ 
     ports:
       - "8000:80"
+
   basket.api:
     container_name: basketapi
     environment:
@@ -53,6 +54,7 @@ services:
       - ${HOME}/.aspnet/https:/root/.aspnet/https/ 
     ports:
       - "8001:80"
+
   ordering.api:
     container_name: orderingapi
     restart: on-failure

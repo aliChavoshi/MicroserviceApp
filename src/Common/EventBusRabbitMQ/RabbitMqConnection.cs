@@ -41,7 +41,7 @@ namespace EventBusRabbitMQ
                 throw new InvalidOperationException("no rabbit connection");
             return _connection.CreateModel();
         }
-        private bool TryConnect()
+        public bool TryConnect()
         {
             while (!IsConnected)
                 _connection = _connectionFactory.CreateConnection();
