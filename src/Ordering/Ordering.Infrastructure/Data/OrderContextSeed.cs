@@ -9,7 +9,8 @@ namespace Ordering.Infrastructure.Data
 {
     public class OrderContextSeed
     {
-        public static async Task SeedAsync(OrderContext context, ILoggerFactory loggerFactory, int? retry = 0)
+        public static async Task SeedAsync(OrderContext context,
+                     ILoggerFactory loggerFactory, int? retry = 0)
         {
             var retryForAvailability = retry.GetValueOrDefault(0);
             try

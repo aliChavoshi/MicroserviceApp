@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text;
-using EventBusRabbitMQ.Event;
+﻿using EventBusRabbitMQ.Event;
 using Newtonsoft.Json;
+using System;
+using System.Text;
 
 namespace EventBusRabbitMQ.Producer
 {
@@ -18,6 +18,7 @@ namespace EventBusRabbitMQ.Producer
 
             channel.QueueDeclare(queue: queueName, durable: false, exclusive: false,
                 autoDelete: false, arguments: null);
+
             var message = JsonConvert.SerializeObject(publishModel);
             var body = Encoding.UTF8.GetBytes(message);
 

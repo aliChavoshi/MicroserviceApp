@@ -35,7 +35,7 @@ namespace Ordering.Api.RabbitMQ
             channel.QueueDeclare(queue: EventBusConstants.BasketCheckoutQueue,
                 durable: false, exclusive: false, autoDelete: false, arguments: null);
 
-            var consumer = new AsyncEventingBasicConsumer(channel);
+            var consumer = new AsyncEventingBasicConsumer(model: channel);
             consumer.Received += ReceivedEvent;
 
             channel.BasicConsume(queue: EventBusConstants.BasketCheckoutQueue,

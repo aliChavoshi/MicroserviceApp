@@ -72,9 +72,8 @@ namespace Basket.Api
                     factory.UserName = username;
                 if (!string.IsNullOrEmpty(password))
                     factory.Password = password;
-
+                //Producer
                 return new RabbitMqConnection(factory);
-
             });
 
             services.AddSingleton<EventBusRabbitMqProducer>();

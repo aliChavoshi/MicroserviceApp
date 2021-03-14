@@ -11,13 +11,13 @@ namespace EventBusRabbitMQ
         private IConnection _connection;
         private readonly bool _disposed;
 
-        public RabbitMqConnection(IConnectionFactory connectionFactory, bool disposed=false)
+        public RabbitMqConnection(IConnectionFactory connectionFactory, bool disposed = false)
         {
             _connectionFactory = connectionFactory;
             _disposed = disposed;
             if (!IsConnected)
                 TryConnect();
-        } 
+        }
 
         public bool IsConnected => _connection != null && _connection.IsOpen && !_disposed;
 
@@ -41,7 +41,7 @@ namespace EventBusRabbitMQ
                 throw new InvalidOperationException("no rabbit connection");
             return _connection.CreateModel();
         }
-        public bool TryConnect()
+        private bool TryConnect()
         {
             while (!IsConnected)
                 _connection = _connectionFactory.CreateConnection();

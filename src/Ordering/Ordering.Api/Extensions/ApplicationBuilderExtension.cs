@@ -7,7 +7,7 @@ namespace Ordering.Api.Extensions
 {
     public static class ApplicationBuilderExtension
     {
-        public static EventBusRabbitMqConsumer Listener { get; set; }
+        private static EventBusRabbitMqConsumer Listener { get; set; }
         public static IApplicationBuilder UseRabbitListener(this IApplicationBuilder app)
         {
             Listener = app.ApplicationServices.GetService<EventBusRabbitMqConsumer>();

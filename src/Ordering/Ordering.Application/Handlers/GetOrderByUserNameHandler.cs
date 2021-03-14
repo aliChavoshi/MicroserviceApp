@@ -11,7 +11,8 @@ using Ordering.Core.Repositories;
 
 namespace Ordering.Application.Handlers
 {
-    public class GetOrderByUserNameHandler : IRequestHandler<GetOrderByUserNameQuery, IEnumerable<OrderResponse>>
+    public class GetOrderByUserNameHandler : IRequestHandler<GetOrderByUserNameQuery,
+                                                          IEnumerable<OrderResponse>>
     {
         private readonly IOrderRepository _orderRepository;
 

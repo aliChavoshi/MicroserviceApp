@@ -15,13 +15,11 @@ services:
     build:
       context: .
       dockerfile: src/Catalog/Catalog.Api/Dockerfile
-
   basket.api:
     image: ${DOCKER_REGISTRY-}basketapi
     build:
       context: .
       dockerfile: src/Basket/Basket.Api/Dockerfile
-
   ordering.api:
     image: ${DOCKER_REGISTRY-}orderingapi
     build:

@@ -33,6 +33,7 @@ namespace Ordering.Api.Controllers
         [ProducesResponseType(typeof(OrderResponse), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> CheckoutOrder([FromBody] CheckoutOrderCommand command)
         {
+            //Add Order To Order Repository and Return Order Response
             var result = await _mediator.Send(request: command);
             return Ok(result);
         }
