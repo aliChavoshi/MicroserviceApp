@@ -41,15 +41,15 @@ namespace Catalog.Api.Controllers
             return NotFound();
         }
 
-        [HttpGet("{categoryName}")]
+        [HttpGet("{category}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)] //404
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)] //200
-        public async Task<IActionResult> GetProductByCategoryName(string categoryName)
+        public async Task<IActionResult> GetProductByCategoryName(string category)
         {
-            var result = await _productRepository.GetProductsByCategory(categoryName);
+            var result = await _productRepository.GetProductsByCategory(category);
             if (result != null) return Ok(result);
 
-            _logger.LogError($"Product with category Name : {categoryName}, NotFound.");
+            _logger.LogError($"Product with category Name : {category}, NotFound.");
             return NotFound();
         }
 
@@ -65,7 +65,6 @@ namespace Catalog.Api.Controllers
             return NotFound();
         }
 
-
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)] //200
         public async Task<IActionResult> CreateProduct([FromBody] Product product)
@@ -73,7 +72,6 @@ namespace Catalog.Api.Controllers
             await _productRepository.Create(product);
             return RedirectToAction("GetProductById", "Catalog", new { id = product.Id });
         }
-
 
         [HttpPut]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.Created)] //200
