@@ -27,3 +27,9 @@ services:
     build:
       context: .
       dockerfile: src/Ordering/Ordering.Api/Dockerfile
+
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: src/ApiGateway/ApiGateway/Dockerfile

@@ -31,19 +31,20 @@ namespace ApiGateway
                 app.UseDeveloperExceptionPage();
             }
 
-            #region Ocelot
-            await app.UseOcelot();
-            #endregion
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
+                endpoints.MapControllers();
+                /*endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
-                });
+                });*/
             });
+
+            #region Ocelot
+            await app.UseOcelot();
+            #endregion
         }
     }
 }

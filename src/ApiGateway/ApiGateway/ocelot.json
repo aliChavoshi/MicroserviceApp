@@ -3,127 +3,131 @@
     //catalog API
     {
       //DownStream
-      "DownStreamPathTemplate": "/api/v1/catalog",
-      "DownStreamPathSchema": "http",
-      "DownStreamPathHostAndPorts": [
+      "DownstreamPathTemplate": "/api/v1/Catalog",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
           //catalogapi -> docker-compose-overrode.yml container name is catalogapi
           "Host": "catalogapi",
-          "Port": "80"
+          "Port": 80
         }
       ],
       //UpStream
-      "UpStreamPathTemplate": "/catalog",
-      "UpStreamHttpMethod": [ "GET", "POST", "PUT" ]
+      "UpstreamPathTemplate": "/catalog",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
     },
     {
       //DownStream
-      "DownStreamPathTemplate": "/api/v1/catalog/{id}",
-      "DownStreamPathSchema": "http",
-      "DownStreamPathHostAndPorts": [
+      "DownstreamPathTemplate": "/api/v1/catalog/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
           //catalogapi -> docker-compose-overrode.yml container name is catalogapi
           "Host": "catalogapi",
-          "Port": "80"
+          "Port": 80
         }
       ],
       //UpStream
-      "UpStreamPathTemplate": "/catalog/{id}",
-      "UpStreamHttpMethod": [ "GET", "DELETE" ]
+      "UpstreamPathTemplate": "/catalog/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
     {
       //DownStream
-      "DownStreamPathTemplate": "/api/v1/catalog/GetProductByCategoryName/{category}",
-      "DownStreamPathSchema": "http",
-      "DownStreamPathHostAndPorts": [
+      "DownstreamPathTemplate": "/api/v1/catalog/GetProductByCategoryName/{category}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
           //catalogapi -> docker-compose-overrode.yml container name is catalogapi
           "Host": "catalogapi",
-          "Port": "80"
+          "Port": 80
         }
       ],
       //UpStream
-      "UpStreamPathTemplate": "/catalog/GetProductByCategoryName/{category}",
-      "UpStreamHttpMethod": [ "GET" ]
+      "UpstreamPathTemplate": "/catalog/GetProductByCategoryName/{category}",
+      "UpstreamHttpMethod": [ "GET" ]
     },
     {
       //DownStream
-      "DownStreamPathTemplate": "/api/v1/catalog/GetProductByName/{name}",
-      "DownStreamPathSchema": "http",
-      "DownStreamPathHostAndPorts": [
+      "DownstreamPathTemplate": "/api/v1/catalog/GetProductByName/{name}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
           //catalogapi -> docker-compose-overrode.yml container name is catalogapi
           "Host": "catalogapi",
-          "Port": "80"
+          "Port": 80
         }
       ],
       //UpStream
-      "UpStreamPathTemplate": "/catalog/GetProductByName/{name}",
-      "UpStreamHttpMethod": [ "GET" ]
+      "UpstreamPathTemplate": "/catalog/GetProductByName/{name}",
+      "UpstreamHttpMethod": [ "GET" ]
     },
 
     //Basket API
     {
       //DownStream
-      "DownStreamPathTemplate": "/api/v1/basket",
-      "DownStreamPathSchema": "http",
-      "DownStreamPathHostAndPorts": [
+      "DownstreamPathTemplate": "/api/v1/basket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
           //catalogapi -> docker-compose-overrode.yml container name is catalogapi
           "Host": "basketapi",
-          "Port": "80"
+          "Port": 80
         }
       ],
       //UpStream
-      "UpStreamPathTemplate": "/Basket",
-      "UpStreamHttpMethod": [ "GET", "POST" ]
+      "UpstreamPathTemplate": "/Basket",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
       //DownStream
-      "DownStreamPathTemplate": "/api/v1/basket/{userName}",
-      "DownStreamPathSchema": "http",
-      "DownStreamPathHostAndPorts": [
+      "DownstreamPathTemplate": "/api/v1/basket/{userName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
           //catalogapi -> docker-compose-overrode.yml container name is catalogapi
           "Host": "basketapi",
-          "Port": "80"
+          "Port": 80
         }
       ],
       //UpStream
-      "UpStreamPathTemplate": "/Basket/{userName}",
-      "UpStreamHttpMethod": [ "DELETE" ]
+      "UpstreamPathTemplate": "/Basket/{userName}",
+      "UpstreamHttpMethod": [ "DELETE" ]
     },
     {
       //DownStream
-      "DownStreamPathTemplate": "/api/v1/basket/checkout",
-      "DownStreamPathSchema": "http",
-      "DownStreamPathHostAndPorts": [
+      "DownstreamPathTemplate": "/api/v1/basket/checkout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
           //catalogapi -> docker-compose-overrode.yml container name is catalogapi
           "Host": "basketapi",
-          "Port": "80"
+          "Port": 80
         }
       ],
       //UpStream
-      "UpStreamPathTemplate": "/Basket/checkout",
-      "UpStreamHttpMethod": [ "POST" ]
+      "UpstreamPathTemplate": "/Basket/checkout",
+      "UpstreamHttpMethod": [ "POST" ]
     },
 
     //Ordering API
     {
       //DownStream
-      "DownStreamPathTemplate": "/api/v1/Order",
-      "DownStreamPathSchema": "http",
-      "DownStreamPathHostAndPorts": [
+      "DownstreamPathTemplate": "/api/v1/Order",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
         {
           //catalogapi -> docker-compose-overrode.yml container name is catalogapi
           "Host": "orderingapi",
-          "Port": "80"
+          "Port": 80
         }
       ],
       //UpStream
-      "UpStreamPathTemplate": "/Order",
-      "UpStreamHttpMethod": [ "GET"]
+      "UpstreamPathTemplate": "/Order",
+      "UpstreamHttpMethod": [ "GET" ]
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration"
+  }
 }
