@@ -1,3 +1,5 @@
+using AspnetRunBasics.ApiCollection;
+using AspnetRunBasics.ApiCollection.Interfaces;
 using AspnetRunBasics.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +28,15 @@ namespace AspnetRunBasics
                 Configuration.GetSection(nameof(ApiSettings)));
             services.AddSingleton<IApiSettings>(
                 sp => sp.GetRequiredService<IOptions<ApiSettings>>().Value);
+            #endregion
+
+            #region IOC
+
+            services.AddHttpClient();
+            services.AddTransient<ICatalogApi, CatalogApi>();
+            services.AddTransient<IBasketApi, BasketApi>();
+            services.AddTransient<IOrderApi, OrderApi>();
+
             #endregion
 
             services.AddRazorPages();
