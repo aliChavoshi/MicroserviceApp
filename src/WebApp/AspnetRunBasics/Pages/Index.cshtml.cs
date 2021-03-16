@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AspnetRunBasics.ApiCollection.Interfaces;
+﻿using AspnetRunBasics.ApiCollection.Interfaces;
 using AspnetRunBasics.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AspnetRunBasics.Pages
 {

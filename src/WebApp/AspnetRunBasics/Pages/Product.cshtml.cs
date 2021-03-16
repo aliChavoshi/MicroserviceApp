@@ -1,54 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using AspnetRunBasics.Repositories;
+using AspnetRunBasics.ApiCollection.Interfaces;
+using AspnetRunBasics.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AspnetRunBasics
+namespace AspnetRunBasics.Pages
 {
     public class ProductModel : PageModel
     {
-        private readonly IProductRepository _productRepository;
-        private readonly ICartRepository _cartRepository;
+        private readonly IBasketApi _basketApi;
+        private readonly ICatalogApi _catalogApi;
 
-        public ProductModel(IProductRepository productRepository, ICartRepository cartRepository)
+        public ProductModel(IBasketApi basketApi, ICatalogApi catalogApi)
         {
-            _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
-            _cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
+            _basketApi = basketApi;
+            _catalogApi = catalogApi;
         }
-
-        public IEnumerable<Entities.Category> CategoryList { get; set; } = new List<Entities.Category>();
-        public IEnumerable<Entities.Product> ProductList { get; set; } = new List<Entities.Product>();
-
+        public IEnumerable<string> CategoryList { get; set; } = new List<string>();
+        public IEnumerable<CatalogModel> ProductList { get; set; } = new List<CatalogModel>();
 
         [BindProperty(SupportsGet = true)]
         public string SelectedCategory { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? categoryId)
+        public async Task<IActionResult> OnGetAsync(string categoryName)
         {
-            CategoryList = await _productRepository.GetCategories();
-
-            if (categoryId.HasValue)
+            var productList = (await _catalogApi.GetCatalog()).ToList();
+            CategoryList = productList.Select(x => x.Category).Distinct();
+            if (!string.IsNullOrWhiteSpace(categoryName))
             {
-                ProductList = await _productRepository.GetProductByCategory(categoryId.Value);
-                SelectedCategory = CategoryList.FirstOrDefault(c => c.Id == categoryId.Value)?.Name;
+                ProductList = productList.Where(x => x.Category == categoryName);
+                SelectedCategory = categoryName;
             }
             else
             {
-                ProductList = await _productRepository.GetProducts();
+                ProductList = productList;
             }
-
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAddToCartAsync(int productId)
+        public async Task<IActionResult> OnPostAddToCartAsync(string productId)
         {
-            //if (!User.Identity.IsAuthenticated)
-            //    return RedirectToPage("./Account/Login", new { area = "Identity" });
+            var product = await _catalogApi.GetCatalog(productId);
+            var userName = "swn";
+            var basket = await _basketApi.GetBasket(userName);
+            basket.Items.Add(new BasketItemModel()
+            {
+                Color = "Red",
+                Price = product.Price,
+                ProductId = productId,
+                ProductName = product.Name,
+                Quantity = 1
+            });
 
-            await _cartRepository.AddItem("test", productId);
+            var basketUpdated = await _basketApi.UpdateBasket(basket);
             return RedirectToPage("Cart");
         }
     }
