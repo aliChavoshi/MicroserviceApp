@@ -38,7 +38,7 @@ namespace Ordering.Api
             services.AddControllers();
 
             //Connection String
-            services.AddDbContextPool<OrderContext>(c =>
+            services.AddDbContext<OrderContext>(c =>
                 c.UseSqlServer(Configuration.GetConnectionString("OrderConnection")));
 
             //IOC

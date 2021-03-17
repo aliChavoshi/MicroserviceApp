@@ -30,8 +30,8 @@ namespace AspnetRunBasics.Pages
         {
             var product = await _catalogApi.GetCatalog(productId);
             var userName = "swn";
-            var basket = await _basketApi.GetBasket(userName);
-            basket.Items.Add(new BasketItemModel()
+            var basket = await _basketApi.GetBasket(userName) ?? new BasketModel();
+            basket.Items.Add(new BasketItemModel
             {
                 Color = "Red",
                 Price = product.Price,

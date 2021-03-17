@@ -18,7 +18,7 @@ namespace AspnetRunBasics.Pages
             _catalogApi = catalogApi;
         }
 
-        public CatalogModel Product { get; set; }
+        public CatalogModel Product { get; set; } = new CatalogModel();
 
         [BindProperty]
         public string Color { get; set; }

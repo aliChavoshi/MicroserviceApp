@@ -21,11 +21,11 @@ namespace AspnetRunBasics.ApiCollection
             return new HttpRequestBuilder(path);
         }
 
-        public async Task<IEnumerable<OrderResponseModel>> GetOrderByUserName(string username)
+        public async Task<IEnumerable<OrderResponseModel>> GetOrderByUserName(string userName)
         {
             var message = GetHttpRequestBuilder(_settings.BaseAddress)
                 .SetPath(_settings.OrderPath)
-                .AddQueryString("username", username)
+                .AddQueryString("userName", userName)
                 .HttpMethod(HttpMethod.Get)
                 .GetHttpMessage();
 

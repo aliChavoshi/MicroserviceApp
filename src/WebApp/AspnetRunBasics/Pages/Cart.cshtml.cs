@@ -16,11 +16,12 @@ namespace AspnetRunBasics.Pages
         {
             _basketApi = basketApi;
         }
+
         public BasketModel Cart { get; set; } = new BasketModel();
 
         public async Task<IActionResult> OnGetAsync()
         {
-            Cart = await _basketApi.GetBasket(username: "swn");
+            Cart = await _basketApi.GetBasket(username: "swn") ?? new BasketModel();
             return Page();
         }
 

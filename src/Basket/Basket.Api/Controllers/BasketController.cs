@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Basket.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/[Controller]/[action]")]
+    [Route("api/v1/[Controller]")]
     public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _basketRepository;
@@ -29,7 +29,7 @@ namespace Basket.Api.Controllers
         [ProducesResponseType(typeof(BasketCart), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetBasket(string userName)
         {
-            return Ok(await _basketRepository.GetBasket(userName) ?? new BasketCart() { UserName = userName });
+            return Ok(await _basketRepository.GetBasket(userName));
         }
 
         [HttpPost]
@@ -46,6 +46,7 @@ namespace Basket.Api.Controllers
             return Ok(await _basketRepository.DeleteBasket(userName));
         }
 
+        [Route("Checkout")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Accepted)] //202
         [ProducesResponseType((int)HttpStatusCode.BadRequest)] //400

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Catalog.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/[Controller]/[action]")]
+    [Route("api/v1/[Controller]")]
     public class CatalogController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -29,7 +29,7 @@ namespace Catalog.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetProduct")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)] //404
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)] //200
         public async Task<IActionResult> GetProductById(string id)
@@ -41,7 +41,8 @@ namespace Catalog.Api.Controllers
             return NotFound();
         }
 
-        [HttpGet("{category}")]
+        [Route("[action]/{category}")]
+        [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.NotFound)] //404
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)] //200
         public async Task<IActionResult> GetProductByCategoryName(string category)
@@ -53,7 +54,7 @@ namespace Catalog.Api.Controllers
             return NotFound();
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("[action]/{name}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)] //404
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)] //200
         public async Task<IActionResult> GetProductByName(string name)

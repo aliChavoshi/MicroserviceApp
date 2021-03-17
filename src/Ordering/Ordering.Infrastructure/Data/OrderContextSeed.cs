@@ -39,23 +39,7 @@ namespace Ordering.Infrastructure.Data
         {
             return new List<Order>
             {
-                new()
-                {
-                    AddressLine = "kashan",
-                    UserName = "Ali",
-                    FirstName = "Ali",
-                    LastName = "Chavoshi",
-                    EmailAddress = "Alichavoshii1372@gamil.com",
-                    Country = "Iran",
-                    CVV = "adf",
-                    CardName = "asef",
-                    CardNumber = "saef",
-                    Expiration = "sadf",
-                    PaymentMethod = 6,
-                    State = "sefjn",
-                    TotalPrice = 541,
-                    ZipCode = "sdf"
-                }
+                new Order() {UserName = "swn", FirstName = "Mehmet", LastName = "Ozkaya", EmailAddress = "ezozkme@gmail.com", AddressLine = "Bahcelievler", Country = "Turkey", TotalPrice = 350 }
             };
         }
     }
