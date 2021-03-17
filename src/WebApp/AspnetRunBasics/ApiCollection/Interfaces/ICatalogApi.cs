@@ -4,6 +4,7 @@ using AspnetRunBasics.Models;
 
 namespace AspnetRunBasics.ApiCollection.Interfaces
 {
+    //Products
     public interface ICatalogApi
     {
         Task<IEnumerable<CatalogModel>> GetCatalog();

@@ -8,6 +8,5 @@ namespace AspnetRunBasics.ApiCollection.Interfaces
         Task<BasketModel> GetBasket(string username);
         Task<BasketModel> UpdateBasket(BasketModel basketModel);
         Task CheckoutBasket(BasketCheckoutModel model);
-
     }
 }

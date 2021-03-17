@@ -34,7 +34,7 @@ namespace AspnetRunBasics.ApiCollection
 
         public async Task<BasketModel> UpdateBasket(BasketModel basketModel)
         {
-            var message = GetHttpRequestBuilder(_apiSettings.BasketPath)
+            var message = GetHttpRequestBuilder(_apiSettings.BaseAddress)
                 .SetPath(_apiSettings.BasketPath)
                 .HttpMethod(HttpMethod.Post)
                 .GetHttpMessage();
